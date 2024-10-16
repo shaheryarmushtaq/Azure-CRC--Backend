@@ -1,0 +1,309 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sites_SHERICanadaCentral_name": {
+      "defaultValue": "SHERICanadaCentral",
+      "type": "String"
+    },
+    "components_sheharyar_name": {
+      "defaultValue": "sheharyar",
+      "type": "String"
+    },
+    "dnszones_www_shaheryar_site_name": {
+      "defaultValue": "www.shaheryar.site",
+      "type": "String"
+    },
+    "components_sheriCanadaCentral_name": {
+      "defaultValue": "sheriCanadaCentral",
+      "type": "String"
+    },
+    "storageAccounts_shaheryarstorage_name": {
+      "defaultValue": "shaheryarstorage",
+      "type": "String"
+    },
+    "serverfarms_ASP_ResourceShaheryar_a2c8_name": {
+      "defaultValue": "ASP-ResourceShaheryar-a2c8",
+      "type": "String"
+    },
+    "serverfarms_ASP_sheriCanadaCentral_21ce_name": {
+      "defaultValue": "ASP-sheriCanadaCentral-21ce",
+      "type": "String"
+    },
+    "serverfarms_ASP_SHERICanadaCentral_2c22_name": {
+      "defaultValue": "ASP-SHERICanadaCentral-2c22",
+      "type": "String"
+    },
+    "serverfarms_ASP_sheriCanadaCentral_3259_name": {
+      "defaultValue": "ASP-sheriCanadaCentral-3259",
+      "type": "String"
+    },
+    "serverfarms_ASP_SHERICanadaCentral_627b_name": {
+      "defaultValue": "ASP-SHERICanadaCentral-627b",
+      "type": "String"
+    },
+    "databaseAccounts_shaheryardatabase_name": {
+      "defaultValue": "shaheryardatabase",
+      "type": "String"
+    },
+    "smartdetectoralertrules_failure_anomalies___sheharyar_name": {
+      "defaultValue": "failure anomalies - sheharyar",
+      "type": "String"
+    },
+    "smartdetectoralertrules_failure_anomalies___shericanadacentral_name": {
+      "defaultValue": "failure anomalies - shericanadacentral",
+      "type": "String"
+    },
+    "actiongroups_application_insights_smart_detection_externalid": {
+      "defaultValue": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/resourcewaqas/providers/microsoft.insights/actiongroups/application insights smart detection",
+      "type": "String"
+    },
+    "workspaces_DefaultWorkspace_5e7dee80_e445_486a_b749_2a2e6f43e1fb_CCAN_externalid": {
+      "defaultValue": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/DefaultResourceGroup-CCAN/providers/Microsoft.OperationalInsights/workspaces/DefaultWorkspace-5e7dee80-e445-486a-b749-2a2e6f43e1fb-CCAN",
+      "type": "String"
+    },
+    "workspaces_workspace_waqasApplicationInsight_externalid": {
+      "defaultValue": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/ResourceWaqas/providers/Microsoft.OperationalInsights/workspaces/workspace-waqasApplicationInsight",
+      "type": "String"
+    },
+    "serverfarms_ASP_SHERICanadaCentral_2c22_externalid": {
+      "defaultValue": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/ResourceShaheryar/providers/Microsoft.Web/serverfarms/ASP-SHERICanadaCentral-2c22",
+      "type": "String"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2023-12-01",
+      "name": "[parameters('sites_SHERICanadaCentral_name')]",
+      "location": "Canada Central",
+      "tags": {
+        "hidden-link: /app-insights-resource-id": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/ResourceShaheryar/providers/microsoft.insights/components/sheriCanadaCentral",
+        "hidden-link: /app-insights-instrumentation-key": "2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b",
+        "hidden-link: /app-insights-conn-string": "InstrumentationKey=2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b;IngestionEndpoint=https://canadacentral-1.in.applicationinsights.azure.com/;LiveEndpoint=https://canadacentral.livediagnostics.monitor.azure.com/;ApplicationId=be501dd2-341f-418b-9699-234833274c56"
+      },
+      "kind": "functionapp,linux",
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "shericanadacentral.azurewebsites.net",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "shericanadacentral.scm.azurewebsites.net",
+            "sslState": "Disabled",
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[parameters('serverfarms_ASP_SHERICanadaCentral_2c22_externalid')]",
+        "reserved": true,
+        "isXenon": false,
+        "hyperV": false,
+        "dnsConfiguration": {},
+        "vnetRouteAllEnabled": false,
+        "vnetImagePullEnabled": false,
+        "vnetContentShareEnabled": false,
+        "siteConfig": {
+          "numberOfWorkers": 1,
+          "linuxFxVersion": "Python|3.11",
+          "acrUseManagedIdentityCreds": false,
+          "alwaysOn": false,
+          "http20Enabled": false,
+          "functionAppScaleLimit": 200,
+          "minimumElasticInstanceCount": 0
+        },
+        "scmSiteAlsoStopped": false,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "clientCertMode": "Required",
+        "hostNamesDisabled": false,
+        "vnetBackupRestoreEnabled": false,
+        "customDomainVerificationId": "53E858D53BAED752CC8299931C24CA9AE6EAAF9FE9CC66FD4BEB05AF45CFF064",
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "httpsOnly": false,
+        "redundancyMode": "None",
+        "storageAccountRequired": false,
+        "keyVaultReferenceIdentity": "SystemAssigned"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+      "apiVersion": "2023-12-01",
+      "name": "[concat(parameters('sites_SHERICanadaCentral_name'), '/ftp')]",
+      "location": "Canada Central",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_SHERICanadaCentral_name'))]"
+      ],
+      "tags": {
+        "hidden-link: /app-insights-resource-id": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/ResourceShaheryar/providers/microsoft.insights/components/sheriCanadaCentral",
+        "hidden-link: /app-insights-instrumentation-key": "2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b",
+        "hidden-link: /app-insights-conn-string": "InstrumentationKey=2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b;IngestionEndpoint=https://canadacentral-1.in.applicationinsights.azure.com/;LiveEndpoint=https://canadacentral.livediagnostics.monitor.azure.com/;ApplicationId=be501dd2-341f-418b-9699-234833274c56"
+      },
+      "properties": {
+        "allow": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+      "apiVersion": "2023-12-01",
+      "name": "[concat(parameters('sites_SHERICanadaCentral_name'), '/scm')]",
+      "location": "Canada Central",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_SHERICanadaCentral_name'))]"
+      ],
+      "tags": {
+        "hidden-link: /app-insights-resource-id": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/ResourceShaheryar/providers/microsoft.insights/components/sheriCanadaCentral",
+        "hidden-link: /app-insights-instrumentation-key": "2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b",
+        "hidden-link: /app-insights-conn-string": "InstrumentationKey=2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b;IngestionEndpoint=https://canadacentral-1.in.applicationinsights.azure.com/;LiveEndpoint=https://canadacentral.livediagnostics.monitor.azure.com/;ApplicationId=be501dd2-341f-418b-9699-234833274c56"
+      },
+      "properties": {
+        "allow": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2023-12-01",
+      "name": "[concat(parameters('sites_SHERICanadaCentral_name'), '/web')]",
+      "location": "Canada Central",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_SHERICanadaCentral_name'))]"
+      ],
+      "tags": {
+        "hidden-link: /app-insights-resource-id": "/subscriptions/5e7dee80-e445-486a-b749-2a2e6f43e1fb/resourceGroups/ResourceShaheryar/providers/microsoft.insights/components/sheriCanadaCentral",
+        "hidden-link: /app-insights-instrumentation-key": "2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b",
+        "hidden-link: /app-insights-conn-string": "InstrumentationKey=2d78a5d2-d0b2-4ee2-96cf-9d387d6dc52b;IngestionEndpoint=https://canadacentral-1.in.applicationinsights.azure.com/;LiveEndpoint=https://canadacentral.livediagnostics.monitor.azure.com/;ApplicationId=be501dd2-341f-418b-9699-234833274c56"
+      },
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "linuxFxVersion": "Python|3.11",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "httpLoggingEnabled": false,
+        "acrUseManagedIdentityCreds": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "$SHERICanadaCentral",
+        "scmType": "None",
+        "use32BitWorkerProcess": false,
+        "webSocketsEnabled": false,
+        "alwaysOn": false,
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false
+          }
+        ],
+        "loadBalancing": "LeastRequests",
+        "experiments": {
+          "rampUpRules": []
+        },
+        "autoHealEnabled": false,
+        "vnetRouteAllEnabled": false,
+        "vnetPrivatePortsCount": 0,
+        "cors": {
+          "allowedOrigins": [
+            "https://www.shaheryar.site"
+          ],
+          "supportCredentials": false
+        },
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": [
+          {
+            "ipAddress": "Any",
+            "action": "Allow",
+            "priority": 2147483647,
+            "name": "Allow all",
+            "description": "Allow all access"
+          }
+        ],
+        "scmIpSecurityRestrictions": [
+          {
+            "ipAddress": "Any",
+            "action": "Allow",
+            "priority": 2147483647,
+            "name": "Allow all",
+            "description": "Allow all access"
+          }
+        ],
+        "scmIpSecurityRestrictionsUseMain": false,
+        "http20Enabled": false,
+        "minTlsVersion": "1.2",
+        "scmMinTlsVersion": "1.2",
+        "ftpsState": "FtpsOnly",
+        "preWarmedInstanceCount": 0,
+        "functionAppScaleLimit": 200,
+        "functionsRuntimeScaleMonitoringEnabled": false,
+        "minimumElasticInstanceCount": 0,
+        "azureStorageAccounts": {}
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/functions",
+      "apiVersion": "2023-12-01",
+      "name": "[concat(parameters('sites_SHERICanadaCentral_name'), '/http_triggersheri')]",
+      "location": "Canada Central",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_SHERICanadaCentral_name'))]"
+      ],
+      "properties": {
+        "script_href": "https://shericanadacentral.azurewebsites.net/admin/vfs/home/site/wwwroot/function_app.py",
+        "test_data_href": "https://shericanadacentral.azurewebsites.net/admin/vfs/tmp/FunctionsData/http_triggersheri.dat",
+        "href": "https://shericanadacentral.azurewebsites.net/admin/functions/http_triggersheri",
+        "config": {
+          "name": "http_triggersheri",
+          "entryPoint": "http_triggersheri",
+          "scriptFile": "function_app.py",
+          "language": "python",
+          "functionDirectory": "/home/site/wwwroot",
+          "bindings": [
+            {
+              "direction": "IN",
+              "type": "httpTrigger",
+              "name": "req",
+              "authLevel": "FUNCTION",
+              "route": "http_triggersheri"
+            },
+            {
+              "direction": "OUT",
+              "type": "http",
+              "name": "$return"
+            }
+          ]
+        },
+        "invoke_url_template": "https://shericanadacentral.azurewebsites.net/api/http_triggersheri",
+        "language": "python",
+        "isDisabled": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "apiVersion": "2023-12-01",
+      "name": "[concat(parameters('sites_SHERICanadaCentral_name'), '/', parameters('sites_SHERICanadaCentral_name'), '.azurewebsites.net')]",
+      "location": "Canada Central",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_SHERICanadaCentral_name'))]"
+      ],
+      "properties": {
+        "siteName": "SHERICanadaCentral",
+        "hostNameType": "Verified"
+      }
+    }
+  ]
+}
