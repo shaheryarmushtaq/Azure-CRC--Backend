@@ -1,63 +1,53 @@
-import json
-import os
-import azure.functions as func
 import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch, MagicMock
+import azure.functions as func
+import json
+import sys
+import os
+from dotenv import load_dotenv
 
-# Import the Azure function you're testing
-from function_app import http_triggerwaqas  # Update with the actual import path
+# Load environment variables from .env file for testing
+load_dotenv()
 
-@pytest.fixture(autouse=True)
-def set_env_vars():
-    """Set up environment variables for testing."""
-    os.environ['COSMOS_ENDPOINT'] = 'mocked_endpoint'
-    os.environ['COSMOS_KEY'] = 'mocked_key'
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-@pytest.fixture
-def mock_container():
-    """Create a mock container for Cosmos DB."""
-    return MagicMock()
+from function_app import http_triggersheri
 
 @pytest.fixture
-def req_without_name():
-    """Create a mock HTTP request without a name in the body."""
-    req_body = json.dumps({"name": "test_user"}).encode('utf-8')
+def mock_request():
     req = MagicMock(spec=func.HttpRequest)
-    req.get_json.return_value = json.loads(req_body)
-    req.__body_bytes = req_body  # Ensure this is bytes
+    req.params = {}
+    req.get_json.return_value = {}
     return req
 
-@patch('function_app.CosmosClient')  # Patch the CosmosClient used in your function
-def test_http_trigger_without_name(mock_cypher_client, req_without_name, mock_container):
-    """Test case where the request does not provide a name."""
-    mock_cypher_client.return_value.get_container.return_value = mock_container
+@patch('function_app.container')
+def http_triggersheri_with_name(mock_container, mock_request, monkeypatch):
+    # Load environment variables for testing
+    monkeypatch.setenv("COSMOS_DB_ENDPOINT", os.getenv("COSMOS_DB_ENDPOINT"))
+    monkeypatch.setenv("COSMOS_DB_KEY", os.getenv("COSMOS_DB_KEY"))
 
-    # Mock CosmosDB response
-    mock_container.read_item.return_value = {'count': 0}
-    mock_container.upsert_item.return_value = None
+    # Set up the mock return value for the container's read_item method
+    mock_container.read_item.return_value = {'visitor_count': 1}
 
-    # Call the function
-    response = http_triggerwaqas(req_without_name)
+    # Simulate a request with a name
+    mock_request.get_json.return_value = {'name': 'Sheri'}
 
-    # Add your assertions here
-    assert response.status_code == 200  # Update with expected status code
-    # Add more assertions as needed
+    response = http_triggersheri(mock_request)
 
-@patch('function_app.CosmosClient')  # Patch the CosmosClient used in your function
-def test_http_trigger_create_new_visitor_item(mock_cypher_client, req_without_name, mock_container):
-    """Test case for creating a new visitor item."""
-    mock_cypher_client.return_value.get_container.return_value = mock_container
+    assert response.status_code == 200
+    data = json.loads(response.get_body())
+    assert data['message'] == "Hello, Sheri. Your name has been added to the database."
+    assert data['visitor_count'] == 1
 
-    # Mock CosmosDB exception and create new item
-    mock_container.read_item.side_effect = Exception('Item not found')
-    mock_container.create_item.return_value = {'count': 1}
 
-    # Call the function and handle the exception if you want
-    response = http_triggerwaqas(req_without_name)
-    # Assuming the function handles the exception internally and returns a response
-    assert response.status_code == 200  # Update with expected status code
+@patch('function_app.container')
+def test_http_triggersheri_without_name(mock_container, mock_request):
+    # Set up the mock return value for the container's read_item method
+    mock_container.read_item.return_value = {'visitor_count': 1}
 
-def test_some_other_case(req_without_name, mock_container):
-    """A placeholder for another test case."""
-    # You can add another test case here for different scenarios
-    pass
+    response = http_triggersheri(mock_request)
+    
+    assert response.status_code == 200
+    data = json.loads(response.get_body())
+    assert data['message'] == "This HTTP triggered function executed successfully."
+    assert data['visitor_count'] == 1
